@@ -1,12 +1,19 @@
-<h2>{{item.name}} Details</h2>
-<div><span>id: </span>{{item.id}}</div>
-<div>
-    <label>name:
-        <input [(ngModel)]="item.name" placeholder="name">
-    </label>
-</div>
-<div>
-    <label>price:
-        <input [(ngModel)]="item.price" placeholder="price" type="number">
-    </label>
+<h2>All Items</h2>
+<ul class="items">
+    <li *ngFor="let item of items" [class.selected]="item === selectedItem" (click)="onSelect(item)">
+        <span class="badge">{{item.id}}</span> {{item.name}} ({{item.price}})
+    </li>
+</ul>
+
+<div *ngIf="selectedItem">
+    <h2>{{selectedItem.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedItem.id}}</div>
+    <div>
+        <label>name:
+            <input [(ngModel)]="selectedItem.name" placeholder="name"/>
+        </label>
+        <label>price:
+            <input [(ngModel)]="selectedItem.price" placeholder="price" type="number">
+        </label>
+    </div>
 </div>
