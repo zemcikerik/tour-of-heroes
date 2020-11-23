@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Item } from '../item';
-import { ITEMS } from '../mock-items';
 
 @Component({
   selector: 'app-items',
@@ -9,7 +8,7 @@ import { ITEMS } from '../mock-items';
 })
 export class ItemsComponent {
 
-  public items: Item[] = ITEMS;
+  @Input() public items: Item[];
   public selectedItem: Item;
 
   public onSelect(item: Item): void {

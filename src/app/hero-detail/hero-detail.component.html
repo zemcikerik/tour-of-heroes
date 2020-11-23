@@ -6,4 +6,6 @@
             <input [(ngModel)]="hero.name" placeholder="name"/>
         </label>
     </div>
+    <h3>{{hero.name}}'s Items</h3>
+    <app-items [items]="hero.items"></app-items>
 </div>
