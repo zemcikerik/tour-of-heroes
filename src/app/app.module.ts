@@ -8,6 +8,10 @@ import { ItemsComponent } from './items/items.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AllItemsComponent } from './all-items/all-items.component';
+import { ItemShopComponent } from './item-shop/item-shop.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,15 @@ import { MessagesComponent } from './messages/messages.component';
     ItemsComponent,
     HeroDetailComponent,
     ItemDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent,
+    AllItemsComponent,
+    ItemShopComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

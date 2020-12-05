@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import { Hero } from './hero';
-import { ItemService } from './item.service';
 import { MessageService } from './message.service';
+import { HEROES } from './mock-heroes';
 
 @Injectable({
   providedIn: 'root'
@@ -12,27 +11,17 @@ import { MessageService } from './message.service';
 export class HeroService {
 
   constructor(
-    private readonly itemService: ItemService,
     private readonly messageService: MessageService
   ) { }
 
+  public getHero(id: number): Observable<Hero> {
+    this.messageService.addMessage(`HeroService: fetching hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
+  }
+
   public getHeroes(): Observable<Hero[]> {
     this.messageService.addMessage('HeroService: fetching heroes');
-
-    return this.itemService.getItems().pipe(
-      map(items => [
-        { id: 1, name: 'Dr Nice', items: [...items] },
-        { id: 2, name: 'Narco', items: [...items] },
-        { id: 3, name: 'Bombasto', items: [...items] },
-        { id: 4, name: 'Celeritas', items: [...items] },
-        { id: 5, name: 'Magneta', items: [...items] },
-        { id: 6, name: 'RubberMan', items: [...items] },
-        { id: 7, name: 'Dynama', items: [...items] },
-        { id: 8, name: 'Dr IQ', items: [...items] },
-        { id: 9, name: 'Magma', items: [...items] },
-        { id: 10, name: 'Tornado', items: [...items] }
-      ])
-    );
+    return of(HEROES);
   }
 
 }

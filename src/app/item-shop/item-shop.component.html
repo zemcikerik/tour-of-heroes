@@ -1,0 +1,11 @@
+<h2>Buy items for {{hero.name}}:</h2>
+<h3>Money: {{hero.money}}</h3>
+
+<div>
+    <div *ngFor="let item of items">
+        <b>{{item.name}}</b> ({{item.price}})
+        <button *ngIf="hero.money >= item.price" (click)="buyItem(item)">Buy</button>
+    </div>
+</div>
+
+<button (click)="goBack()">Go Back</button>

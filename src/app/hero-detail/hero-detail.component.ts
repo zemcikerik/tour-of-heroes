@@ -1,13 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Hero } from '../hero';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
 })
-export class HeroDetailComponent {
+export class HeroDetailComponent implements OnInit {
 
-  @Input() public hero: Hero;
+  public hero: Hero;
+
+  constructor(
+    private readonly heroService: HeroService,
+    private readonly route: ActivatedRoute,
+    private readonly location: Location
+  ) { }
+
+  public ngOnInit(): void {
+    const id: number = +this.route.snapshot.paramMap.get('id');
+
+    this.heroService.getHero(id)
+      .subscribe(hero => this.hero = hero);
+  }
+
+  public goBack(): void {
+    this.location.back();
+  }
 
 }
