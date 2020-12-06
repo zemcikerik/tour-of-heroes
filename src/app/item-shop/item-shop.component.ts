@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
+import { mergeMap } from 'rxjs/operators';
+
 import { HeroService } from '../hero.service';
 import { ItemService } from '../item.service';
 import { Hero } from '../hero';
@@ -44,7 +47,8 @@ export class ItemShopComponent implements OnInit {
     this.hero.items.push(item);
     this.items.splice(this.items.indexOf(item), 1);
 
-    // TODO: call update
+    this.heroService.updateHero(this.hero).subscribe();
+    this.itemService.updateItem(item).subscribe();
   }
 
   public goBack(): void {

@@ -27,6 +27,11 @@ export class ItemDetailComponent implements OnInit {
       .subscribe(item => this.item = item);
   }
 
+  public save(): void {
+    this.itemService.updateItem(this.item)
+      .subscribe(() => this.goBack());
+  }
+
   public goBack(): void {
     this.location.back();
   }

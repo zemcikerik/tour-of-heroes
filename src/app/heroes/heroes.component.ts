@@ -16,10 +16,24 @@ export class HeroesComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.heroService.getHeroes().subscribe({
-      next: heroes => this.heroes = heroes,
-      error: err => console.error(err)
-    });
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
+  }
+
+  public create(name: string, money: number): void {
+    name = name.trim();
+
+    if (!name || money < 0) {
+      return;
+    }
+
+    this.heroService.addHero({ name, money, items: [] } as Hero)
+      .subscribe(hero => this.heroes.push(hero));
+  }
+
+  public delete(hero: Hero): void {
+    this.heroes.splice(this.heroes.indexOf(hero), 1);
+    this.heroService.deleteHero(hero).subscribe();
   }
 
 }
